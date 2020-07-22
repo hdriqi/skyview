@@ -77,11 +77,14 @@ const ImgCard = ({ id, file }) => {
   const _upload = async (file) => {
     return new Promise((resolve, reject) => {
       const formData = new FormData()
-      formData.append('file', file)
+      var blob = file.slice(0, file.size, 'image/png'); 
+      const id = Math.random().toString(36).substr(2, 18);
+      const newFile = new File([blob], `${id}.png`, {type: 'image/png'});
 
-      axios.post(`https://siasky.net/skynet/skyfile`, formData)
+      formData.append('file', newFile)
+      axios.post(`/api/upload`, formData)
         .then(resp => {
-          resolve(`https://siasky.net/${resp.data.skylink}`)
+          resolve(resp.data.url)
         }).catch(error => {
           reject(error)
         })
@@ -101,7 +104,7 @@ const ImgCard = ({ id, file }) => {
       setUploading(false)
       setImgListUrl([...resultUpload])
       setCode(`
-        <img alt=${file.name} class="lazy" src=${resultUpload[0]} data-srcset="${resultUpload[1]} 640w, ${resultUpload[2]} 1024w, ${resultUpload[3]} 1920w" />
+        <img alt="${file.name}" class="lazy" src="${resultUpload[0]}" data-srcset="${resultUpload[1]} 640w, ${resultUpload[2]} 1024w, ${resultUpload[3]} 1920w" />
       `)
     }
     init()

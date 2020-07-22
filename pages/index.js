@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Head from 'next/head'
 import Dropzone from 'react-dropzone'
 import ImgCard from '../components/imgCard'
@@ -23,6 +23,7 @@ const Home = () => {
         <meta name="description" content="Generate multiple responsive image for lazy loading and their code easily." />
         <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css?family=Sen&display=swap" rel="stylesheet" />
+        <script src="https://sdk.amazonaws.com/js/aws-sdk-2.1.12.min.js" />
         <style>
           {
             `
