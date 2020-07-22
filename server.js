@@ -21,8 +21,8 @@ var storage = multer.memoryStorage({
 var multipleUpload = multer({ storage: storage }).array('file');
 
 const BUCKET_NAME = 'paras-media';
-const IAM_USER_KEY = 'AKIAIXM7RHD76NWUH4VQ';
-const IAM_USER_SECRET = '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';
+const IAM_USER_KEY = process.env.IAM_USER_KEY;
+const IAM_USER_SECRET = process.env.IAM_USER_SECRET;
 
 var s3 = new AWS.S3({
   accessKeyId: IAM_USER_KEY,
